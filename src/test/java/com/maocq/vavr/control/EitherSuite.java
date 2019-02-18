@@ -9,13 +9,21 @@ import static org.junit.Assert.assertEquals;
 public class EitherSuite {
 
     @Test
-    public void swapToEither() {
+    public void testEither() {
         Either<Integer, String> eitherR = Either.right("Right");
         Integer numero = 5;
         Either<Integer, String> eitherL = Either.left(5);
 
         assertEquals("", "Right", eitherR.get());
         assertEquals("", numero, eitherL.getLeft());
+    }
+
+    @Test
+    public void testSwapToEither() {
+        Either<Integer, String> eitherR = Either.right("Right");
+        Either<String, Integer> swap = eitherR.swap();
+
+        assertEquals("", "Right", swap.getLeft());
     }
 
     @Test

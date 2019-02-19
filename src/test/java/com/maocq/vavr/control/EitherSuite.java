@@ -1,9 +1,10 @@
 package com.maocq.vavr.control;
 
 import io.vavr.control.Either;
+import io.vavr.control.Try;
 import org.junit.Test;
 
-import static io.vavr.API.None;
+import static io.vavr.API.*;
 import static org.junit.Assert.assertEquals;
 
 public class EitherSuite {
@@ -80,6 +81,22 @@ public class EitherSuite {
         );
 
         assertEquals("", "Error", nuevoValor);
+    }
+
+    @Test
+    public void testTryToEither() {
+        Try<Integer> myTry = Try.of(() -> 6 / 2);
+        Either<Throwable, Integer> either = myTry.toEither();
+
+        assertEquals("", Either.right(3), either);
+    }
+
+    @Test
+    public void testEitherToTry() {
+        Either<Integer, String> eitherR = Either.right("Right");
+        Try<String> myTry = eitherR.toTry();
+
+        assertEquals("", Success("Right"), myTry);
     }
 
 }

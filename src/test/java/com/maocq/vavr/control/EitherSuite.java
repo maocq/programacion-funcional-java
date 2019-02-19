@@ -32,13 +32,13 @@ public class EitherSuite {
         Either<String, Integer> valor = Either.right(3);
         Either<String, Integer> nuevoValor = valor.map(numero -> numero + 2);
 
-        assertEquals("", Either.right(5), nuevoValor);
+        assertEquals("", Right(5), nuevoValor);
 
 
         Either<String, Integer> valor2 = Either.left("Left");
         Either<String, Integer> nuevoValor2 = valor2.map(numero -> numero + 2);
 
-        assertEquals("", Either.left("Left"), nuevoValor2);
+        assertEquals("", Left("Left"), nuevoValor2);
     }
 
     @Test
@@ -46,13 +46,13 @@ public class EitherSuite {
         Either<String, Integer> valor = Either.right(3);
         Either<String, Integer> nuevoValor = valor.flatMap(numero -> Either.right(numero + 2));
 
-        assertEquals("", Either.right(5), nuevoValor);
+        assertEquals("", Right(5), nuevoValor);
 
 
         Either<String, Integer> valor2 = Either.right(3);
         Either<String, Integer> nuevoValor2 = valor.flatMap(numero -> Either.left("Left"));
 
-        assertEquals("", Either.left("Left"), nuevoValor2);
+        assertEquals("", Left("Left"), nuevoValor2);
     }
 
     @Test
@@ -88,7 +88,7 @@ public class EitherSuite {
         Try<Integer> myTry = Try.of(() -> 6 / 2);
         Either<Throwable, Integer> either = myTry.toEither();
 
-        assertEquals("", Either.right(3), either);
+        assertEquals("", Right(3), either);
     }
 
     @Test

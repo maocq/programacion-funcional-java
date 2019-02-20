@@ -3,9 +3,31 @@ package com.maocq.vavr.control;
 import io.vavr.concurrent.Future;
 import org.junit.Test;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 import static org.junit.Assert.assertEquals;
 
 public class FutureSuite {
+
+    @Test
+    public void executor() {
+        ExecutorService executor = Executors.newFixedThreadPool(2);
+
+        executor.submit(() -> {
+            sleep(2000);
+            String threadName = Thread.currentThread().getName();
+            System.out.println("Hello " + threadName);
+        });
+        executor.submit(() -> {
+            sleep(2000);
+            String threadName = Thread.currentThread().getName();
+            System.out.println("Hello " + threadName);
+        });
+
+        System.out.println("End");
+        sleep(4000);
+    }
 
     @Test
     public void testFuture() {

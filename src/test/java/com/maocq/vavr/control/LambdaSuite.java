@@ -12,7 +12,7 @@ import static org.junit.Assert.assertEquals;
 public class LambdaSuite {
 
     @Test
-    public void claseAnonima() {
+    public void testClaseAnonima() {
 
         MyInterface claseAnonima = new MyInterface() {
 
@@ -21,28 +21,28 @@ public class LambdaSuite {
             }
         };
 
-        assertEquals("", "Ok.", claseAnonima.apply("Ok"));
+        assertEquals("Ok.", claseAnonima.apply("Ok"));
     }
 
     @Test
-    public void lambda() {
+    public void testLambda() {
         MyInterface lamda = texto -> texto + ".";
-        assertEquals("", "Ok.", lamda.apply("Ok"));
+        assertEquals("Ok.", lamda.apply("Ok"));
     }
 
     @Test
-    public void genericos() {
+    public void testGenericos() {
         InterfaceGenerica lamda = texto -> texto + ".";
-        assertEquals("", "Ok.", lamda.apply("Ok"));
+        assertEquals("Ok.", lamda.apply("Ok"));
     }
 
     @Test
-    public void referenciaMetodo() {
+    public void testReferenciaMetodo() {
         Function<String, String> metodo = this::metodo;
-        assertEquals("", "Ok.", metodo.apply("Ok"));
+        assertEquals("Ok.", metodo.apply("Ok"));
 
         List<String> lista = List.of("1", "2", "3").map(this::metodo);
-        assertEquals("", "1.", lista.head());
+        assertEquals("1.", lista.head());
     }
 
     private String metodo(String texto) {

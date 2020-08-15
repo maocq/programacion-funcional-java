@@ -2,9 +2,12 @@ package com.maocq.vavr.control;
 
 import com.maocq.InterfaceGenerica;
 import com.maocq.MyInterface;
+import com.maocq.Persona;
+import io.vavr.Function3;
 import io.vavr.collection.List;
 import org.junit.Test;
 
+import java.math.BigDecimal;
 import java.util.function.Function;
 
 import static org.junit.Assert.assertEquals;
@@ -43,6 +46,11 @@ public class LambdaSuite {
 
         List<String> lista = List.of("1", "2", "3").map(this::metodo);
         assertEquals("1.", lista.head());
+
+        Function3<String, Integer, BigDecimal, Persona> constructor = Persona::new;
+
+        Persona persona = constructor.apply("A", 18, new BigDecimal("100"));
+        assertEquals("A", persona.getNombre());
     }
 
     private String metodo(String texto) {

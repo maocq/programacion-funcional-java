@@ -36,7 +36,7 @@ public class FutureSuite {
             return "Ok";
         });
 
-        assertEquals("", "Ok", future.get());
+        assertEquals("Ok", future.get());
     }
 
     @Test(expected = Error.class)
@@ -51,18 +51,29 @@ public class FutureSuite {
     public void testFutureMap() {
         Future<String> future = Future.of(() -> "Ok");
         Future<Integer> futureMap = future.map(String::length);
-        Integer numero = 2;
 
-        assertEquals("", numero, futureMap.get());
+        assertEquals(Integer.valueOf(2), futureMap.get());
     }
 
     @Test
     public void testFutureFlatMap() {
+        Future<Integer> resultado = foo()
+          .flatMap(this::bar);
+
+        assertEquals(Integer.valueOf(2), resultado.get());
+
         Future<String> future = Future.of(() -> "Ok");
         Future<Integer> futureFlatMap = future.flatMap(it -> Future.of(() -> it.length()));
-        Integer numero = 2;
 
-        assertEquals("", numero, futureFlatMap.get());
+        assertEquals(Integer.valueOf(2), futureFlatMap.get());
+    }
+
+    private Future<String> foo() {
+        return Future.of(() -> "Ok");
+    }
+
+    private Future<Integer> bar(String texto) {
+        return Future.of(texto::length);
     }
 
     @Test
@@ -72,13 +83,13 @@ public class FutureSuite {
         });
         Future<String> futureRecover = future.recover(error -> error.getMessage());
 
-        assertEquals("", "Failure =(", futureRecover.get());
+        assertEquals("Failure =(", futureRecover.get());
     }
 
     private Future<Integer> futures(String mensaje) {
         return Future.of(() -> {
             System.out.println("Inicio " + mensaje);
-            sleep(5000);
+            sleep(3000);
             System.out.println("Fin " + mensaje);
             return 1;
         });
@@ -97,7 +108,7 @@ public class FutureSuite {
 
         Integer numero = 3;
 
-        assertEquals("", numero, resultado.get());
+        assertEquals(numero, resultado.get());
     }
 
 
@@ -109,5 +120,4 @@ public class FutureSuite {
             e.printStackTrace();
         }
     }
-
 }

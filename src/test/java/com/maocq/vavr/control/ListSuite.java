@@ -51,9 +51,9 @@ public class ListSuite {
     @Test
     public void groupBy() {
         List<Persona> personas = List.of(
-          new Persona("", 20, new BigDecimal("100")),
-          new Persona("", 25, new BigDecimal("100")),
-          new Persona("", 20, new BigDecimal("100")));
+          new Persona("A", 20, new BigDecimal("100")),
+          new Persona("B", 25, new BigDecimal("100")),
+          new Persona("C", 20, new BigDecimal("100")));
 
         Map<Integer, List<Persona>> personasPorEdades =
           personas.groupBy(Persona::getEdad);

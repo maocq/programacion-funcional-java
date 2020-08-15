@@ -1,6 +1,6 @@
 package com.maocq;
 
-public interface MyInterface {
+public interface InterfaceGenerica {
 
     String apply(String arg);
 }

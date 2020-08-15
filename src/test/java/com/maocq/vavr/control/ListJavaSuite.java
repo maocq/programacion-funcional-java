@@ -36,5 +36,4 @@ public class ListJavaSuite {
 
         assertEquals("", resultado, total);
     }
-
 }

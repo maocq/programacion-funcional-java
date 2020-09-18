@@ -3,11 +3,13 @@ package com.maocq.vavr.control;
 import com.maocq.Persona;
 import io.vavr.collection.List;
 import io.vavr.collection.Map;
+import io.vavr.control.Option;
 import org.junit.Test;
 
 import java.math.BigDecimal;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class ListSuite {
 
@@ -24,6 +26,17 @@ public class ListSuite {
 
         List<Integer> rangoCerrado = List.rangeClosed(0, 9);
         assertEquals(10, rangoCerrado.size());
+    }
+
+    @Test
+    public void headTail() {
+        List<Integer> lista = List.of(1, 2, 3);
+
+        Option<Integer> head = lista.headOption();
+        List<Integer> tail = lista.tail();
+
+        assertTrue(head.isDefined());
+        assertEquals(2, tail.size());
     }
 
     @Test
@@ -78,6 +91,29 @@ public class ListSuite {
     }
 
     @Test
+    public void find() {
+        List<Integer> lista = List.of(1, 2, 3);
+
+        List<Integer> dos = lista.filter(e -> e == 2);
+        assertEquals(1, dos.size());
+    }
+
+    @Test
+    public void mkString() {
+        List<String> lista = List.of("Hello", "word");
+        String texto = lista.mkString(" ");
+        assertEquals("Hello word", texto);
+    }
+
+    @Test
+    public void foldLeft() {
+        List<Integer> lista = List.of(1, 2, 3);
+
+        int suma = lista.foldLeft(0, Integer::sum);
+        assertEquals(6, suma);
+    }
+
+    @Test
     public void list() {
         List<Integer> lista = List.of(1, 2, 3, 4, 5);
 
@@ -89,5 +125,13 @@ public class ListSuite {
         Integer resultado = 6;
 
         assertEquals(resultado, total);
+    }
+
+    @Test
+    public void distinct() {
+        List<Integer> lista = List.of(1, 1, 2);
+        List<Integer> distict = lista.distinct();
+
+        assertEquals(2, distict.size());
     }
 }
